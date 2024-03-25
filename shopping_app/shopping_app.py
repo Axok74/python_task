@@ -2,6 +2,7 @@ from customer import Customer
 from item import Item
 from seller import Seller
 
+
 seller = Seller("DIC Store")
 for i in range(10):
     Item("CPU", 40830, seller)
@@ -17,6 +18,8 @@ for i in range(10):
 
 print("🤖 Please tell me your name")
 customer = Customer(input())
+
+walletVendedor = customer.wallet.balance
 
 print("🏧 Please enter the amount to charge to your wallet")
 customer.wallet.deposit(int(input()))
@@ -45,6 +48,7 @@ while not end_shopping:
 
 print("💸 Do you want to confirm the purchase? (yes/no)")
 if input() == "yes":
+    customer.wallet.balance = customer.wallet.balance - customer.cart.total_amount()
     seller.wallet.deposit(customer.cart.total_amount())
     customer.cart.check_out()
 
